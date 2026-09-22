@@ -1,0 +1,103 @@
+﻿@model Pr06_Api.Model.Character
+
+@{
+    ViewData["Title"] = "Rick and Morty";
+}
+
+<h1>Rick and Morty</h1>
+
+<form method="post" asp-action="Index">
+    <input type="number"
+           name="id"
+           min="1"
+           required
+           placeholder="Enter character ID" />
+
+    <button type="submit">Search</button>
+</form>
+
+<br />
+
+<form method="get" action="/RickAndMorty/GetAll">
+    <button type="submit">Get All Characters</button>
+</form>
+
+<hr />
+
+<!-- Message -->
+@if (ViewBag.Message != null)
+{
+    <p>@ViewBag.Message</p>
+}
+
+<!-- Display one character -->
+@if (Model != null)
+{
+    <h2>@Model.Name</h2>
+
+    <p>
+        <strong>Id:</strong> @Model.Id
+    </p>
+
+    <p>
+        <strong>Status:</strong> @Model.Status
+    </p>
+
+    <p>
+        <strong>Species:</strong> @Model.Species
+    </p>
+
+    <p>
+        <strong>Gender:</strong> @Model.Gender
+    </p>
+
+    <img src="@Model.Image"
+         alt="@Model.Name"
+         width="300" />
+
+    <hr />
+}
+
+<!-- Display all characters -->
+@if (ViewBag.Characters != null)
+{
+    <h2>All Characters</h2>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+
+        @foreach (var character in ViewBag.Characters)
+        {
+            <div style="
+                width: 200px;
+                border: 1px solid #ccc;
+                padding: 10px;
+                border-radius: 5px;
+                ">
+
+                <img src="@character.Image"
+                     alt="@character.Name"
+                     width="150" />
+
+                <h3>@character.Name</h3>
+
+                <p>
+                    <strong>Id:</strong> @character.Id
+                </p>
+
+                <p>
+                    <strong>Status:</strong> @character.Status
+                </p>
+
+                <p>
+                    <strong>Species:</strong> @character.Species
+                </p>
+
+                <p>
+                    <strong>Gender:</strong> @character.Gender
+                </p>
+
+            </div>
+        }
+
+    </div>
+}

@@ -1,0 +1,71 @@
+﻿@model Pr06_Api.Model.Apod
+
+@{
+    ViewData["Title"] = "Nasa APOD";
+}
+
+<h1>NASA - Astronomy Picture of the Day</h1>
+
+@if (ViewBag.ErrorMessage != null)
+{
+    <p style="color:red;"><strong>Fejl:</strong> @ViewBag.ErrorMessage</p>
+}
+
+<form method="post" action="/Nasa/GetByDate">
+    <label for="date">Vælg dato:</label>
+    <input type="date" id="date" name="date" required />
+    <button type="submit">Hent billede</button>
+</form>
+
+<br />
+
+<form method="post" action="/Nasa/GetByDateRange">
+    <label for="startDate">Startdato:</label>
+    <input type="date" id="startDate" name="startDate" required />
+
+    <label for="endDate">Slutdato:</label>
+    <input type="date" id="endDate" name="endDate" required />
+
+    <button type="submit">Hent billeder i periode</button>
+</form>
+
+<hr />
+
+@if (Model != null)
+{
+    <h2>@Model.Title (@Model.Date)</h2>
+    <p>@Model.Explanation</p>
+
+    @if (Model.Media_type == "image")
+    {
+        <img src="@Model.Url" alt="@Model.Title" width="500" />
+    }
+    else if (Model.Media_type == "video")
+    {
+        <p><a href="@Model.Url" target="_blank">Se video</a></p>
+    }
+}
+
+@if (ViewBag.ApodList != null)
+{
+    <h2>Billeder i valgt periode</h2>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+        @foreach (var apod in ViewBag.ApodList)
+        {
+            <div style="width: 250px; border: 1px solid #ccc; padding: 10px; border-radius: 5px;">
+                <h3>@apod.Title</h3>
+                <p><strong>Dato:</strong> @apod.Date</p>
+
+                @if (apod.Media_type == "image")
+                {
+                    <img src="@apod.Url" alt="@apod.Title" width="200" />
+                }
+                else
+                {
+                    <p><a href="@apod.Url" target="_blank">Se video</a></p>
+                }
+            </div>
+        }
+    </div>
+}

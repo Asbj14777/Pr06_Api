@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "Pr06_Api/1.0.0": {
+        "runtime": {
+          "Pr06_Api.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Pr06_Api/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
